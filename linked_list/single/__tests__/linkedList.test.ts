@@ -70,3 +70,47 @@ describe("Test prepend method", () => {
     expect(linkedList!.size).toBe(3);
   });
 });
+
+describe("Test delete method", () => {
+  let linkedList: LinkedList<number | string | boolean> | null;
+  beforeEach(() => {
+    linkedList = new LinkedList();
+  });
+  it("Should be delete both head and tail if it matches", () => {
+    linkedList?.append(20);
+    expect(linkedList?.head?.value).toBeNull();
+    expect(linkedList?.tail?.value).toBeNull();
+  });
+  it("Should delete all values if multiple exists", () => {
+    linkedList?.append(20);
+    linkedList?.append(true);
+    linkedList?.append(20);
+    linkedList?.delete(20);
+    expect(linkedList?.head?.value).toBe(true);
+    expect(linkedList?.tail?.value).toBe(true);
+  });
+});
+
+describe("Test toArray method", () => {
+  let linkedList: LinkedList<number | string | boolean> | null;
+  beforeEach(() => {
+    linkedList = new LinkedList();
+  });
+  it("Should return empty array for empty linked list", () => {
+    expect(linkedList?.toArray()).toEqual([]);
+  });
+  it("Should preserve order in array", () => {
+    linkedList?.append("First");
+    linkedList?.append("Second");
+    const listArray = linkedList!.toArray();
+    expect(listArray[0]).toBe("first");
+    expect(listArray[1]).toBe("second");
+  });
+  it("Should return correct array after many operations", () => {
+    linkedList!.append("First");
+    linkedList!.append("Second");
+    linkedList!.prepend("prepend");
+    linkedList!.delete("Second");
+    expect(linkedList!.toArray()).toBe(["prepend", "First"]);
+  });
+});
