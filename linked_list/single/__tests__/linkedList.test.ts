@@ -41,4 +41,32 @@ describe("Test size getter", () => {
   });
 });
 
-describe("Test prepend method", () => {});
+describe("Test prepend method", () => {
+  let linkedList: LinkedList<number | string | boolean> | null;
+  beforeEach(() => {
+    linkedList = new LinkedList();
+  });
+  it("Should set head and tail value for empty list", () => {
+    linkedList!.prepend(true);
+    expect(linkedList!.head!.value).toBe(true);
+    expect(linkedList!.tail!.value).toBe(true);
+  });
+  it("Should set first value when append method is called before", () => {
+    linkedList!.append(20);
+    linkedList!.append("more");
+    linkedList!.prepend(false);
+    expect(linkedList!.head!.value).toBe(false);
+  });
+  it("Should set first value when prepend method is called multiple times", () => {
+    linkedList!.prepend(20);
+    linkedList!.prepend("more");
+    linkedList!.prepend(false);
+    expect(linkedList!.head!.value).toBe(false);
+  });
+  it("Should set correct size when prepend is called multiple times", () => {
+    linkedList!.prepend(20);
+    linkedList!.prepend("more");
+    linkedList!.prepend(false);
+    expect(linkedList!.size).toBe(3);
+  });
+});
