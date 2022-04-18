@@ -54,6 +54,11 @@ export default class LinkedList<T = any> {
     this.head = node;
   }
 
+  /**
+   * If the value is the head, set the head to the next node. If the value is the tail, set the tail to
+   * the current node. If the value is in the middle, set the next node to the next node of the next node
+   * @param {T} value - T - the value to be deleted
+   */
   public delete(value: T) {
     if (this.head?.value === value) {
       this.head = this.head.next;
@@ -63,11 +68,10 @@ export default class LinkedList<T = any> {
       if (current.next?.value === value) {
         current.next = current.next.next;
       }
-
-      if (this.tail?.value === value) {
-        this.tail === current;
-      }
       current = current.next;
+    }
+    if (value === this.tail?.value) {
+      this.tail === current;
     }
   }
   /**
